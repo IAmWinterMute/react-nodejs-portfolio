@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 //Routes
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../assets/views/', 'martinIndex.htm'));
+    return res.sendFile(path.join(__dirname, '../assets/views/', 'martinIndex.htm'));
 });
 
 //Export the router

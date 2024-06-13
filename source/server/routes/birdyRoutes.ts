@@ -78,7 +78,7 @@ router.get('/api/birdySPA/geolocation', (req, res) => {
 
 //Routes
 router.get('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../assets/views', 'birdyIndex.htm'));
+    return res.sendFile(path.join(__dirname, '../assets/views', 'birdyIndex.htm'));
 });
 
 

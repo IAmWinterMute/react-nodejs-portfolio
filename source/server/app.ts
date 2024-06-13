@@ -33,6 +33,7 @@ connectToMongoDB().then(ok => {
 
   // 404 Middleware
   mtdServer.use((req, res, next) => {
+    LogItem({ title: "404", message: "Requested resource wasn't found: "})
     return res.status(404).json({ message: 'Not Found' });
   });
 

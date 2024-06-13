@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "noEmitOnError":false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "jsx": "react",
+        "target": "es6",
+        "moduleResolution": "NodeNext",
+        //"moduleResolution": "bundler", This didn't work. 
+        "module": "NodeNext",
+        "outDir": "./build/",
+        //"esModuleInterop": true
+        //"sourceMap": true,
+        //"importHelpers": false,
+        //"strict": false,
+        //"alwaysStrict":false,
+        //"incremental": true,
+        //"skipLibCheck": true,
+        //"inlineSourceMap": true,
+        //"noUnusedLocals": true, // Report errors on unused locals. Good to enable time to time... 
+        //"noUnusedParameters": true, // Report errors on unused parameters. Good to enable time to time... 
+        //"tsBuildInfoFile": "./tsBuildInfoFile.info",
+    },
+    "include": [
+        "source/sharedLayer/**/*",
+        "./source/client/**/*",
+        "./source/server/**/*", "source/sharedLayer",
+    ],
+    "exclude": ["node_modules", "build", "**/*.js", "**/*.jsx"]
+}

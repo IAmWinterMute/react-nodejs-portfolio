@@ -4,7 +4,7 @@ import fancyLog from 'fancy-log'
 import { ILog } from '../../sharedLayer/log.js';
 
 //Create the ts schema
-interface IDBLog extends ILog,mongoose.Document{_id?: string;}
+interface IDBLog extends ILog,mongoose.Document{_id: string;}
 
 //Create mongoose schema
 let logSchema = new mongoose.Schema({

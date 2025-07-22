@@ -14,7 +14,7 @@ export default function IndexPage() {
             </div>
             <div className="w3-display-bottomleft w3-container">
                 <p className="w3-xlarge"></p>
-                <p className="w3-large">More Than Devs AB <br/>Independent consultant for IT dev. React/NodeJS/Express/MongoDB /../ C#/SQL Server</p>
+                <p className="w3-large">More Than Devs AB <br/>Independent consultant for IT dev. React/NodeJS/Express/MongoDB /../ Machine Vision/Cognex/Omron</p>
             </div>
         </div>
 
@@ -33,7 +33,7 @@ export default function IndexPage() {
                         This full-stack application is built using React, NodeJS, Express, and MongoDB. The React layer is crafted with 
                         functional components, hooks, global state management using reducers, and a contract layer for server communication.<br />
                         <br />
-                        <a href="https://bird.morethandevs.com">Bird Alert</a><br />
+                        <a href="https://bird.martinerlandsson.com">Bird Alert</a><br />
                         <a href="https://github.com/IAmWinterMute">Repository</a><br />
                         <br />
                     </h5>
@@ -51,7 +51,8 @@ export default function IndexPage() {
                 </div>
                 <div className="w3-container">
                     <br />
-                    Please email inq@morethandevs.com for contact<br />
+                    Please get in contact with us if you have any inquiries. <br />
+                    Email info@morethandevs.com for contact<br />
                     <br />
                 </div>
             </div>

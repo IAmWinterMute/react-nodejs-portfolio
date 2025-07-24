@@ -26,15 +26,14 @@ connectToMongoDB().then(ok => {
     }
   }))
 
-  //Redirecting  www domains to non-www domains
-   mtdServer.use((req, res, next) => {
-    if (req.hostname === 'www.morethandevs.com') {
-      return res.redirect(301, `https://morethandevs.com${req.url}`);
+  //Redirecting www domains to non-www domains
+  mtdServer.use((req, res, next) => {
+    const redirects: Record<string, string> = {
+      'www.morethandevs.com': 'https://morethandevs.com',
+      'www.martinerlandsson.com': 'https://martinerlandsson.com',
     }
-    if (req.hostname === 'www.martinerlandsson.com') {
-      return res.redirect(301, `https://martinerlandsson.com${req.url}`);
-    }
-    next();
+    if (redirects[req.hostname]) return res.redirect(301, `${redirects[req.hostname]}${req.url}`)
+    next()
   });
 
   //Setting up the routing for the different domains
@@ -44,7 +43,7 @@ connectToMongoDB().then(ok => {
 
   //Redirect www domains to non-www domains
   mtdServer.use((req, res, next) => {
-   
+
     if (req.hostname === 'www.martinerlandsson.com') {
       return res.redirect(301, `https://martinerlandsson.com${req.url}`);
     }
@@ -54,7 +53,7 @@ connectToMongoDB().then(ok => {
 
   // 404 Middleware
   mtdServer.use((req, res, next) => {
-    LogItem({ title: "404", message: "Requested resource wasn't found: " + req.path})
+    LogItem({ title: "404", message: "Requested resource wasn't found: " + req.path })
     return res.status(404).json({ message: 'Not Found' });
   });
 

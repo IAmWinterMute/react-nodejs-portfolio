@@ -11,7 +11,8 @@ export default function BirdGrid() {
     //State
     const gs = React.useContext(BirdyGlobalStateContext)
     const [sorting, setSorting] = React.useState<"sightings" | "alphabetical">("sightings")
-
+    const [page, setPage] = React.useState(1)
+    const birdsPerPage = 9
 
     //Return the design with data
     if (gs.birdSightings?.length > 0) {
@@ -25,7 +26,14 @@ export default function BirdGrid() {
                 if (a.howMany < b.howMany) return 1
             }
         })
-        sortedBirdSightings = sortedBirdSightings.slice(0,6)
+      
+
+        // Pagination
+        const totalPages = Math.ceil(sortedBirdSightings.length / birdsPerPage)
+        const paginatedBirdSightings = sortedBirdSightings.slice(
+            (page - 1) * birdsPerPage,
+            page * birdsPerPage
+        )
 
         //The design of the grid
         return <>
@@ -43,7 +51,38 @@ export default function BirdGrid() {
                 </div>
             </header>
             <div className="w3-row-padding">
-                {sortedBirdSightings.map(bird => <BirdItem birdSighting={bird} />)}
+                <div className="w3-row-padding">
+                    {paginatedBirdSightings.map(bird => (
+                        <BirdItem birdSighting={bird} />
+                    ))}
+                </div>
+            </div>
+
+            <div className="w3-center w3-padding-32">
+                <div className="w3-bar">
+                    <a
+                        href="#"
+                        className="w3-bar-item w3-button w3-hover-black"
+                        onClick={e => { e.preventDefault(); if (page > 1) setPage(page - 1); }}
+                        aria-disabled={page === 1}
+                        style={{ pointerEvents: page === 1 ? "none" : undefined, opacity: page === 1 ? 0.5 : 1 }}
+                    >«</a>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <a
+                            href="#"
+                            key={i + 1}
+                            className={`w3-bar-item w3-button${page === i + 1 ? " w3-black" : " w3-hover-black"}`}
+                            onClick={e => { e.preventDefault(); setPage(i + 1); }}
+                        >{i + 1}</a>
+                    ))}
+                    <a
+                        href="#"
+                        className="w3-bar-item w3-button w3-hover-black"
+                        onClick={e => { e.preventDefault(); if (page < totalPages) setPage(page + 1); }}
+                        aria-disabled={page === totalPages}
+                        style={{ pointerEvents: page === totalPages ? "none" : undefined, opacity: page === totalPages ? 0.5 : 1 }}
+                    >»</a>
+                </div>
             </div>
         </>
     }

@@ -13,8 +13,6 @@ export function routeDomain(checkDomain: string, fn: (req: express.Request, res:
     return function (req: express.Request, res: express.Response, next: express.NextFunction) {
 
         //Doing this simple, just routing the first domain
-        console.log(req.hostname.split("."))
-        console.log(req.hostname.split(".")[0])
         if (req.hostname.split(".")[0]?.toLowerCase() == checkDomain.toLowerCase()) { return fn(req, res, next) }
 
         //No match, continue in the request process

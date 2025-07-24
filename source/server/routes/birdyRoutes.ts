@@ -63,9 +63,15 @@ router.get('/api/birdySPA/geolocation', (req, res) => {
 
     //Specifing the contract for this endpoint to force agreed upon response
     const contract = contractGetGeoData({})
-
     //Getting the Ip from the request
-    const clientIp = requestIP.getClientIp(req);
+    let clientIp: string = requestIP.getClientIp(req);
+
+    // Check if IP is invalid or localhost chanage it to a default public IP for testing
+    if (!clientIp || clientIp.includes('::ffff')) {
+        clientIp = '80.201.92.192'
+    }
+ 
+    console.log("Client IP: " + clientIp);
 
     //Getting the geolocation
     axios.get<IGeolocation>('https://api.ipgeolocation.io/ipgeo?apiKey=' + process.env.GEOLOCATION + '&ip=' + clientIp).then(result => {

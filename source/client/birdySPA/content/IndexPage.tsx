@@ -3,12 +3,21 @@ import useGeolocation from '../hooks/useGeolocation.js'
 import { BirdyGlobalStateContext } from '../store/BirdyGS.js'
 import useBird from '../hooks/useBirdSighting.js'
 import BirdGrid from './BirdGrid/BirdGrid.js'
+import { REDUCER_ACTION } from '../store/Reducers.js'
 
 export default function IndexPage() {
 
     const gs = React.useContext(BirdyGlobalStateContext)
     const useLocation = useGeolocation({})
     const useBirdy = useBird({})
+
+    // Handler for map click
+    const handleMapSelect = (latlng) => {
+        gs.dispatchLocation({
+            type: REDUCER_ACTION.SET,
+            payload: { ...gs.location, latitude: latlng.lat, longitude: latlng.lng }
+        })
+    }
 
     React.useEffect(() => {
         useLocation.updateLocation()
@@ -34,6 +43,8 @@ export default function IndexPage() {
                 <h4><b>LOCATION</b></h4>
                 Long: {gs.location?.longitude}<br />
                 Lat: {gs.location?.latitude}<br />
+
+
             </div>
         </nav>
 
@@ -44,21 +55,12 @@ export default function IndexPage() {
         <div className="w3-main" style={{ marginLeft: 300 }}>
 
 
-          
+
 
             <BirdGrid />
 
 
-            <div className="w3-center w3-padding-32">
-                <div className="w3-bar">
-                    <a href="#" className="w3-bar-item w3-button w3-hover-black">«</a>
-                    <a href="#" className="w3-bar-item w3-black w3-button">1</a>
-                    <a href="#" className="w3-bar-item w3-button w3-hover-black">2</a>
-                    <a href="#" className="w3-bar-item w3-button w3-hover-black">3</a>
-                    <a href="#" className="w3-bar-item w3-button w3-hover-black">4</a>
-                    <a href="#" className="w3-bar-item w3-button w3-hover-black">»</a>
-                </div>
-            </div>
+
 
 
             <footer className="w3-container w3-padding-32 w3-dark-grey">

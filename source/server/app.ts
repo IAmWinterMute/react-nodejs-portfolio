@@ -26,10 +26,31 @@ connectToMongoDB().then(ok => {
     }
   }))
 
-  //Setting up the routing
+  //Redirecting  www domains to non-www domains
+   mtdServer.use((req, res, next) => {
+    if (req.hostname === 'www.morethandevs.com') {
+      return res.redirect(301, `https://morethandevs.com${req.url}`);
+    }
+    if (req.hostname === 'www.martinerlandsson.com') {
+      return res.redirect(301, `https://martinerlandsson.com${req.url}`);
+    }
+    next();
+  });
+
+  //Setting up the routing for the different domains
   routeMore(mtdServer)
   routeMartin(mtdServer)
   routeBirdy(mtdServer)
+
+  //Redirect www domains to non-www domains
+  mtdServer.use((req, res, next) => {
+   
+    if (req.hostname === 'www.martinerlandsson.com') {
+      return res.redirect(301, `https://martinerlandsson.com${req.url}`);
+    }
+    next();
+  });
+
 
   // 404 Middleware
   mtdServer.use((req, res, next) => {

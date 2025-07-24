@@ -24,9 +24,10 @@ export function routeDomain(checkDomain: string, fn: (req: express.Request, res:
 }
 
 export function routeMore(server: express.Application) {
+    
     server.use(routeDomain('morethandevs', express.static(path.join(__dirname, '..', '../moreSPA/')))) //Static for all the assets
-    server.use(routeDomain('www', express.static(path.join(__dirname, '..', '../moreSPA/')))) //Static for all the assets
     server.use(routeDomain('morethandevs', moreRoutes)) //Route for public Index
+    server.use(routeDomain('www', express.static(path.join(__dirname, '..', '../moreSPA/')))) //Static for all the assets
     server.use(routeDomain('www', moreRoutes)) //Route for public Index
 }
 
